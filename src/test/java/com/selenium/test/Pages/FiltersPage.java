@@ -1,5 +1,8 @@
 package com.selenium.test.Pages;
 
+import com.selenium.test.elements.ButtonElement;
+import com.selenium.test.elements.InputElement;
+import com.selenium.test.methods.Methods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -8,38 +11,48 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FiltersPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private ButtonElement buttonElement;
+    private InputElement inputElement;
+    private Methods methods;
 
     public FiltersPage(WebDriver driver){
-        this.driver = driver;
-        this.wait = new WebDriverWait(this.driver, 20);
+        buttonElement = new ButtonElement(driver);
+        inputElement = new InputElement(driver);
+        methods = new Methods(driver);
     }
     // Задать диапазон цен
-    public void setPrices(String priceFrom, String priceTo){
-        driver.findElement(By.id("glf-pricefrom-var")).sendKeys(priceFrom);
-        driver.findElement(By.id("glf-priceto-var")).sendKeys(priceTo);
+    public FiltersPage setPrices(String priceFrom, String priceTo){
+        inputElement.inputById("glf-pricefrom-var", priceFrom);
+        inputElement.inputById("glf-priceto-var", priceTo);
+        return this;
     }
     // Выбрать определенные бренды
-    public void chooseBrands(String ... brandsList){
-        WebElement firstBrand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='n-filter-block__list-items-wrap']")));
-        firstBrand.click();
+    public void chooseBrands(WebDriver driver, String ... brandsList){
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e){
+
+        }
+        WebElement brands = driver.findElement(By.className("n-filter-block__list-items-wrap"));
 
         for (String i: brandsList) {
             String firstSymbol = Character.toString(i.charAt(0));
-            WebElement catBrand = driver.findElement(By.xpath("//div[text()='" + firstSymbol + "']"));
+            WebElement catBrand = brands.findElement(By.xpath("//div[text()='" + firstSymbol + "']"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", catBrand);
             WebElement el;
-            el = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[text()='" + i + "']")));
+            el = brands.findElement(By.xpath("//label[text()='" + i + "']"));
             el.click();
         }
     }
     // Показать всё
-    public WebElement showAllBrands(){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/button")));
+    public FiltersPage showAllBrands(){
+        buttonElement.clickByXpath("/html/body/div[1]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/button");
+        return this;
     }
     // Показать все элементы
-    public WebElement showResults(){
-        return driver.findElement(By.cssSelector("a.button:nth-child(2)"));
+    public FiltersPage getResults(){
+        buttonElement.clickByCssSelector("a.button:nth-child(2)");
+        methods.nextPageConfirm("купить на Яндекс.Маркете");
+        return this;
     }
 }

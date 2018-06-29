@@ -4,12 +4,11 @@ import com.selenium.test.Pages.*;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static org.junit.Assert.assertEquals;
+import java.util.concurrent.TimeUnit;
+
 
 public class MainTest {
     protected WebDriver driver;
@@ -24,6 +23,7 @@ public class MainTest {
     public void setUp(){
         FirefoxDriverManager.getInstance().setup();
         driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
     @After
     public void tearDown(){

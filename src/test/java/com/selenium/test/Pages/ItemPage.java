@@ -1,25 +1,26 @@
 package com.selenium.test.Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.selenium.test.elements.DivElement;
+import com.selenium.test.elements.TextElement;
 
-import java.util.List;
+import org.openqa.selenium.WebDriver;
 
 public class ItemPage {
+    DivElement divElement;
+    TextElement textElement;
 
-    private WebDriver driver;
-    public ItemPage(WebDriver driver){
-        this.driver = driver;
+    public ItemPage(WebDriver driver) {
+        divElement = new DivElement(driver);
+        textElement = new TextElement(driver);
     }
 
     public String itemTitleSearch(){
-        String itemTitle = driver.findElement(By.className("title")).getText();
-        return itemTitle;
+         String itemTitle = textElement.getText("title");
+         return itemTitle;
     }
     // Подсчет элементов в разделе Предложения магазинов
     public int countShopOffers(){
-        List<WebElement> cards = driver.findElements(By.className("n-product-top-offer"));
-        return cards.size();
+        int count = divElement.countDivCards("n-product-top-offer");
+        return count;
     }
 }
