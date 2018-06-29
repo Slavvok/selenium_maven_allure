@@ -42,13 +42,4 @@ public class Methods {
         return getElement(By.className(i)).isDisplayed();
     }
 
-    public WebElement getOneFromMultiple(String ... text){
-        for (String i : text){
-            if (exists(i)){
-                return getByXpathText('a', i);
-            }
-
-        }
-        return null;
-    }
 }

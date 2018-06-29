@@ -13,14 +13,10 @@ public class LinkElement {
         methods = new Methods(driver);
     }
 
-    public void click(String text){
-        methods.chooseFromList(text);
+    public void getByXpath(String xpath){
+        methods.getElement(By.xpath(xpath)).click();
     }
 
-    public void getByXpath(String text){
-        driver.findElement(By.xpath(text)).click();
-
-    }
     public void getByXpathText(String text){
         methods.getByXpathText('a', text).click();
     }

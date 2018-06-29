@@ -10,10 +10,7 @@ public class TabletsTest extends MainTest {
     @Test
     @DisplayName("Market tablets test")
     public void test(){
-        init();
-        driver.manage().window().maximize();
-        driver.get("https://yandex.ru");
-        page.getMenuItem();
+        yandexPage.getMarket();
         mainMenu.getComputers();
         categoriesPage.getTablets();
         itemsPage.getAllFilters();

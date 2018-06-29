@@ -4,6 +4,7 @@ import com.selenium.test.elements.DivElement;
 import com.selenium.test.elements.LinkElement;
 import com.selenium.test.elements.TextElement;
 import com.selenium.test.methods.Methods;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,16 +25,20 @@ public class ItemsPage {
         textElement = new TextElement(driver);
     }
 
+    @Step
+    // Перейти ко всем фильтрам
     public ItemsPage getAllFilters(){
         linkElement.getByXpathText("Перейти ко всем фильтрам");
         methods.nextPageConfirm("Все фильтры");
         return this;
     }
-
+    @Step
+    // Посчитать количество товаров на странице
     public Integer countItems(){
         return divElement.countDivCards("n-snippet-card2");
     }
-
+    @Step
+    // Получить заголовок конкретного товара на странице
     public String getItemTitle(int num){
         List<WebElement> cards = divElement.getDivList("n-snippet-card2");
         // Выбор третьего элемента

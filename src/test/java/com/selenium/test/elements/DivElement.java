@@ -26,9 +26,6 @@ public class DivElement {
         return getDivList(className).size();
     }
 
-    public void count(){
-
-    }
 }
 
 
