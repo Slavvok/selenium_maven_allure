@@ -17,8 +17,8 @@ public class TabletsTest extends MainTest {
 
         filtersPage.setPrices("20000", "25000")
                 .showAllBrands()
-                .chooseBrands(driver,"Acer", "Lenovo");
-        filtersPage.getResults();
+                .chooseBrands(driver,"Acer", "Lenovo")
+                .getResults();
 
         int a = itemsPage.countItems();
         System.out.println(a);

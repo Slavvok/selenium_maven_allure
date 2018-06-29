@@ -27,8 +27,8 @@ public class NotebooksTest extends MainTest {
 
         filtersPage.setPrices("0", "30000")
                 .showAllBrands()
-                .chooseBrands(driver,"HP", "Lenovo");
-        filtersPage.getResults();
+                .chooseBrands(driver,"HP", "Lenovo")
+                .getResults();
 
         int a = itemsPage.countItems();
         System.out.println(a);

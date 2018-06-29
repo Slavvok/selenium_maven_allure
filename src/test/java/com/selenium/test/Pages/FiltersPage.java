@@ -30,7 +30,7 @@ public class FiltersPage {
     }
     // Выбрать определенные бренды
     @Step
-    public void chooseBrands(WebDriver driver, String ... brandsList){
+    public FiltersPage chooseBrands(WebDriver driver, String ... brandsList){
         try {
             Thread.sleep(1000);
         } catch (Exception e){
@@ -46,6 +46,7 @@ public class FiltersPage {
             el = brands.findElement(By.xpath("//label[text()='" + i + "']"));
             el.click();
         }
+        return this;
     }
     // Показать всё
     @Step
